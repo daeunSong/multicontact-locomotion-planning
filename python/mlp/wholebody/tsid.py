@@ -372,7 +372,8 @@ def generate_wholebody_tsid(cfg, cs_ref, fullBody=None, viewer=None):
 
     # Create a robot wrapper
     rp = RosPack()
-    package_path = rp.get_path(cfg.Robot.packageName)
+    #package_path = rp.get_path(cfg.Robot.packageName)
+    package_path='/opt/openrobots/share/'+cfg.Robot.packageName
     urdf = package_path + '/urdf/' + cfg.Robot.urdfName + cfg.Robot.urdfSuffix + '.urdf'
     logger.info("load robot : %s", urdf)
     robot = tsid.RobotWrapper(urdf, pin.StdVec_StdString(), pin.JointModelFreeFlyer(), False)
