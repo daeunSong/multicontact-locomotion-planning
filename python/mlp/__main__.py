@@ -20,13 +20,12 @@ cfg = Config()
 cfg.load_scenario_config(demo_name)
 
 with ServerManager('hpp-rbprm-server'):
-    if not args.no_viewer:
-        with ServerManager('gepetto-gui'):
-            loco_planner = LocoPlanner(cfg)
-            loco_planner.run()
-    else:
-        loco_planner = LocoPlanner(cfg)
-        loco_planner.run()
-
-
-
+    # if not args.no_viewer:
+    #     with ServerManager('gepetto-gui'):
+    #         loco_planner = LocoPlanner(cfg)
+    #         loco_planner.run()
+    # else:
+    #     loco_planner = LocoPlanner(cfg)
+    #     loco_planner.run()
+    loco_planner = LocoPlanner(cfg)
+    loco_planner.run()
