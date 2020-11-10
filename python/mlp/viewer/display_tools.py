@@ -226,6 +226,7 @@ def initScene(Robot, envName="multicontact/ground", genLimbsDB=True):
     from hpp.gepetto import Viewer, ViewerFactory
     from hpp.corbaserver.rbprm.rbprmfullbody import FullBody
     from hpp.corbaserver import ProblemSolver
+    from gepetto.corbaserver import gui_client
     fullBody = Robot()
     fullBody.client.robot.setDimensionExtraConfigSpace(6)
     fullBody.setJointBounds("root_joint", [-100, 100, -100, 100, -100, 100])
@@ -241,6 +242,15 @@ def initScene(Robot, envName="multicontact/ground", genLimbsDB=True):
         print("WARNING initScene : fullBody do not have loadAllLimbs, some scripts may fails.")
     ps = ProblemSolver(fullBody)
     vf = ViewerFactory(ps)
+    gui = gui_client(window_name="scene_hpp_")
+    # set background color
+    gui.setBackgroundColor1("scene_hpp_",[1.,1.,1.,1.])
+    gui.setBackgroundColor2("scene_hpp_",[1.,1.,1.,1.])
+    # add light
+    gui.addLight("light", "scene_hpp_", 0.1, [0.2,0.2,0.2,0.5])
+    gui.applyConfiguration("light", [2.5,0.,3.,0.,0.,0.,0.])
+    gui.addToGroup("light", "scene_hpp_")
+
     vf.loadObstacleModel("package://hpp_environments/urdf/" + envName + ".urdf", "planning")
     v = vf.createViewer(ghost = True, displayCoM=True)
     v(fullBody.getCurrentConfig())
